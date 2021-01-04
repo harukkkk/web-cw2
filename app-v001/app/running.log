@@ -1,0 +1,75 @@
+2021-01-02 18:26:14,687 - [line:87] - INFO: haru have registered in IP 127.0.0.1
+2021-01-02 18:26:18,439 - [line:59] - INFO: haru have signed in with IP 127.0.0.1
+2021-01-03 10:22:46,589 - [line:59] - INFO: haru have signed in with IP 127.0.0.1
+2021-01-03 10:28:45,571 - [line:116] - INFO: haru have created category mood in with IP 127.0.0.1
+2021-01-03 10:28:50,798 - [line:145] - INFO: haru have created article 一月三号 in with IP 127.0.0.1
+2021-01-03 10:28:58,602 - [line:206] - INFO: haru have updated article 一月三号 in with IP 127.0.0.1
+2021-01-03 10:29:10,466 - [line:225] - INFO: haru have deleted article 一月三号 in with IP 127.0.0.1
+2021-01-03 18:59:08,000 - [line:1891] - ERROR: Exception on /login/ [GET]
+Traceback (most recent call last):
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\ASUS\Desktop\网页\cw2\app-v001\app\web\routes.py", line 42, in login
+    # print(dir(root_blueprint))
+OSError: [Errno 22] Invalid argument
+2021-01-03 18:59:08,294 - [line:1891] - ERROR: Exception on /login/ [GET]
+Traceback (most recent call last):
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\ASUS\Desktop\网页\cw2\app-v001\app\web\routes.py", line 42, in login
+    # print(dir(root_blueprint))
+OSError: [Errno 22] Invalid argument
+2021-01-03 18:59:37,501 - [line:1891] - ERROR: Exception on /login/ [GET]
+Traceback (most recent call last):
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\ASUS\Desktop\网页\cw2\app-v001\app\web\routes.py", line 42, in login
+    # print(dir(root_blueprint))
+OSError: [Errno 22] Invalid argument
+2021-01-03 19:01:51,210 - [line:1891] - ERROR: Exception on /login/ [GET]
+Traceback (most recent call last):
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\ASUS\Desktop\网页\cw2\app-v001\app\web\routes.py", line 42, in login
+    # print(dir(root_blueprint))
+OSError: [Errno 22] Invalid argument

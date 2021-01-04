@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='select2/css/select2.min.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container main-content">
+<h1 class="text-center">{{ title }}</h1>
+    <hr>
+    <form action="" method="post" class="needs-validation" id="myForm">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+            <label for="{{ form.title.label.field_id }}" class="form-label">{{ form.title.label.text }}</label>
+            {% with field = form.title %}
+                {% if field.errors %}
+                {{ field(class="form-control is-invalid", placeholder="Please enter article title here", maxlength="128", minlengh="3") }}
+                {% for error in field.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+                {% else %}
+                {% if is_submitted %}
+                    {{ field(class="form-control is-valid", placeholder="Please enter article title here", maxlength="128", minlengh="3") }}
+                {% else %}
+                    {{ field(class="form-control", placeholder="Please enter article title here", maxlength="128", minlengh="3") }}
+                    <div class="invalid-feedback">Title accepts 3-128 chars.</div>
+                {% endif %}
+                <div class="valid-feedback">Looks good!</div>
+                {% endif %}
+            {% endwith %}
+        </div>
+
+    <div class="mb-3">
+            <label for="{{ form.content.label.field_id }}" class="form-label">{{ form.content.label.text }}</label>
+            {% with field = form.content %}
+                {% if field.errors %}
+                {{ field(class="form-control is-invalid", placeholder="Please enter article caontent here") }}
+                {% for error in field.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+                {% else %}
+                {% if is_submitted %}
+                    {{ field(class="form-control is-valid", placeholder="Please enter article content here") }}
+                {% else %}
+                    {{ field(class="form-control", placeholder="Please enter article content here") }}
+                    <div class="invalid-feedback">Content is required.</div>
+                {% endif %}
+                <div class="valid-feedback">Looks good!</div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    
+    <div class="mb-3">
+            <label for="{{ form.categories.label.field_id }}" class="form-label">{{ form.categories.label.text }}</label>
+            <button class="btn btn-link" type="button" onclick="showCreateCategoryModal()"><i class="bi bi-plus-circle-fill"></i>Create a new category</button>
+            {% with field = form.categories %}
+                {% if field.errors %}
+                {{ field(class="form-control is-invalid", placeholder="Please select article categories here") }}
+                {% for error in field.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+                {% else %}
+                {% if is_submitted %}
+                    {{ field(class="form-control is-valid", placeholder="Please select article categories here") }}
+                {% else %}
+                    {{ field(class="form-control", placeholder="Please select article categories here") }}
+                    <div class="invalid-feedback">You have to choose one category at least.</div>
+                {% endif %}
+                <div class="valid-feedback">Looks good!</div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    
+    <button type="button" class="btn btn-primary" onclick="validateFields()">Submit</button>
+    </form>
+
+</div>
+
+<div class="modal fade" id="categoryCreateModal" tabindex="-1" aria-labelledby="categoryCreateModalTitle" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="categoryCreateModalTitle">Create a new category</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+            <label for="categoryName" class="formal-label">Category Name</label>
+            <input type="text" required name="categoryName" id="categoryName" class="form-control">
+            <div class="invalid-feedback">Category name accepts 3-128 chars</div>
+            <div class="valid-feedback">Looks good</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="doCreateCategory()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{{ url_for('static', filename='select2/js/select2.min.js') }}"></script>
+    <script>
+    let categoryCreateModal =  new bootstrap.Modal(document.getElementById('categoryCreateModal'), {
+        keyboard: false
+    });
+    let title = document.getElementById('title');
+    let content =  document.getElementById('content');
+    let categorySelect =  document.getElementById('categories');
+
+    function validateFields(){
+        let n = 0;
+
+        if (title.value.length <= 128 && title.value.length >= 3){
+            title.classList.remove('is-invalid');
+            title.classList.add('is-valid');
+            n ++;
+        } else {
+            title.classList.remove('is-valid');
+            title.classList.add('is-invalid');
+        }
+        if (content.value.length > 0){
+            content.classList.remove('is-invalid');
+            content.classList.add('is-valid');
+            n ++;
+        } else {
+            content.classList.remove('is-valid');
+            content.classList.add('is-invalid');
+        }
+        if ($('#categories').val().length > 0){
+            categorySelect.classList.remove('is-invalid');
+            categorySelect.classList.add('is-valid');
+            n ++;
+        } else {
+            categorySelect.classList.remove('is-valid');
+            categorySelect.classList.add('is-invalid');
+        }
+        if (n === 3){
+            setTimeout(function (  ){
+                document.getElementById('myForm').submit();
+            }, 1000)
+        }
+    }
+    function showCreateCategoryModal(){
+        categoryCreateModal.show();
+    }
+    function doCreateCategory(){
+        let categoryName = document.getElementById('categoryName');
+        if (categoryName.value.length >= 3 && categoryName.value.length <= 128){
+            categoryName.classList.remove('is-invalid');
+            categoryName.classList.add('is-valid');
+            setTimeout(function (){
+                $.ajax({
+                    url: `/category/create/${btoa(categoryName.value)}`,
+                    type: 'get',
+                    success: function ( ret ){
+                        categoryCreateModal.hide();
+                        if (ret.flag){
+                            let op = new Option(ret.name, ret.id, true);
+                            categorySelect.options.add(op, 0)
+                            categorySelect.options[0].selected = true;
+                        } else {
+                            for (let i=0; i<categorySelect.options.length; i++){
+                                if (categorySelect.options[i].value === `${ret.id}`){
+                                    categorySelect.options[i].selected = true;
+                                }
+                            }
+                        }
+                        categoryName.value = '';
+                        categoryName.classList.remove('is-valid');
+                        categoryName.classList.remove('is-invalid');
+                    }
+                })
+            }, 1000)
+        } else {
+            categoryName.classList.remove('is-valid');
+            categoryName.classList.add('is-invalid');
+        }
+    }
+    function addActiveBinder(el){
+        el.target.classList.remove('is-valid');
+        el.target.classList.remove('is-invalid');
+    }
+    document.addEventListener('DOMContentLoaded', function (){
+        title.addEventListener('input', addActiveBinder);
+        content.addEventListener('input', addActiveBinder);
+
+        $('#categories').select2();
+        $('#categories').trigger('change');
+        $('#categories').on('change', addActiveBinder);
+    })
+    </script>
+{% endblock %}

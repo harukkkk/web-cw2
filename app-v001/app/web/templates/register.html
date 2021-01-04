@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static',filename = 'css/login.css') }}">
+{% endblock %}
+{% block content %}
+<div class="login-box">
+            <img src="{{ url_for('static',filename='images/timg.jfif') }}" class="avatar">
+            <h1>User Register</h1>
+                <form method="post">
+                    {{ form.hidden_tag() }}
+                    {{ form.username.label }}
+                    {{ form.username() }}
+                    {% with field = form.username %}
+                    {% if field.errors %}
+                        <ul class=errors>
+                        {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% endwith %}
+                    {{ form.password.label }}
+                    {{ form.password() }}
+                    {% with field = form.password %}
+                    {% if field.errors %}
+                        <ul class=errors>
+                        {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% endwith %}
+                    {{ form.password2.label }}
+                    {{ form.password2() }}
+                    {% with field = form.password2 %}
+                    {% if field.errors %}
+                        <ul class=errors>
+                        {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% endwith %}
+                    <input type="submit" name="submit" value="Register">
+                </form>
+            <a href="{{url_for('main.login')}}">Goto Login</a>
+        </div>
+{% endblock %}

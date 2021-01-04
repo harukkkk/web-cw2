@@ -1,0 +1,37 @@
+
+body {
+  padding-top: 3rem;
+  color: #ffffff;
+  height: 100%;
+  background: transparent;
+}
+html{
+    margin: 0;
+    padding: 0;
+    background: url(/static/images/road-through-dense-pine-forest.jpg) no-repeat center center fixed;
+    background-size: cover;
+
+    height: 100%;
+    font-family: sans-serif;
+    width: 1000vm;
+}
+div.main-content{
+  display: block;
+  background-color: rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  padding-top: 50px;
+  padding-bottom: 50px;
+  height: 100%;
+}
+span.select2-container{
+  display: block;
+   width: 100% !important;
+}
+
+.select2-results {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.select2-container .select2-selection--multiple .select2-selection__rendered{
+  color: #0F192A;
+}

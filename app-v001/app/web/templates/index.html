@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container main-content">
+<h1 class="text-center">{{ title }}</h1>
+    <hr>
+<table class="table table-responsive">
+    <thead>
+    <tr class="text-white text-center">
+        <th>Title</th>
+        <th>Author</th>
+        <th>Created at</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for article in ls %}
+    <tr class="text-white">
+        <td><a href="{{ url_for('main.article_view', article_id=article.id, article_title=article.title) }}">{{ article.title }}</a></td>
+        <td class="text-center">{{ article.user.name }}</td>
+        <td class="text-center">{{ article.created_at.strftime("%d/%B, %Y %I:%M:%S %p") }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+
+</div>
+{% endblock %}

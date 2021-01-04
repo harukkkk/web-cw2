@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container main-content">
+<h1 class="text-center">{{ article.title }}</h1>
+    <hr>
+<table class="table text-white">
+    <tr>
+        <th width="120">Author</th>
+        <td>{{ article.user.name }}</td>
+    </tr>
+    <tr>
+        <th>Created at</th>
+        <td>{{ article.created_at.strftime("%d/%B, %Y %I:%M:%S %p") }}</td>
+    </tr>
+    <tr>
+        <th>Body</th>
+        <td><pre>{{ article.content }}</pre></td>
+    </tr>
+    <tr>
+        <th>Categories</th>
+        <td>
+            {% if article.category_ls|length %}
+            <ul>
+            {% for cat in article.category_ls %}
+                <li>{{ cat.name }}</li>
+            {% endfor %}
+            </ul>
+            {% else %}
+                ---
+            {% endif %}
+        </td>
+    </tr>
+    {% if current_user.is_authenticated and article.user_id == current_user.id %}
+    <tr>
+        <th>Option</th>
+        <td>
+            <a class="btn btn-primary" href="{{ url_for('main.article_edit', article_id=article.id) }}"><i class="bi bi-pencil-square"></i> Edit</a>
+            <button class="btn btn-danger" onclick="confirmBeforeDelete()"><i class="bi bi-trash"></i>Delete</button>
+        </td>
+
+    </tr>
+    {% endif %}
+</table>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script>
+    function confirmBeforeDelete(){
+        let r = confirm("Do Your want to delete current article?", );
+        if (r){
+            let _href="{{ url_for('main.article_delete', article_id=article.id) }}";
+            window.location.assign(_href);
+        }
+    }
+    </script>
+{% endblock %}
